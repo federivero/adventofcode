@@ -1,0 +1,78 @@
+var lines = temp1.innerHTML.split("\n");
+var values = lines[0].split(",");
+values = values.map((v) => parseInt(v));
+var boards = [];
+
+var board = [];
+// generate boards
+for (let i = 1; i < lines.length; i++){
+    if (!lines[i].length == 0){
+        var boardline = lines[i];
+        boardline = boardline.split(" ");
+        boardline = boardline.filter((b) => b.length > 0).map((b) => parseInt(b));
+        boardline = boardline.map((b) => { return { ok: false, value: b } });
+        board.push(boardline);
+        if (board.length == 5){
+            boards.push(board);
+            board = [];
+        }
+    }
+}
+
+var boardwon = boards.map((b) => false);
+
+// play game
+playgame:
+for (let i = 0; i < values.length; i++){
+    var v = values[i];
+    for (let b = 0; b < boards.length; b++){
+        if (!boardwon[b]){
+            let board = boards[b];
+            for (let j = 0; j < board.length; j++){
+                for (let k = 0; k < board[j].length; k++){
+                    if (board[j][k].value == v){
+                        board[j][k].ok = true;
+
+                        // check if won
+                        var linecompleted = true;
+                        for (let q = 0; q < 5; q++){
+                            if (!board[j][q].ok){
+                                linecompleted = false;
+                                break;
+                            }
+                        }
+                        if (!linecompleted){
+                            linecompleted = true;
+                            for (let q = 0; q < 5; q++){
+                                if (!board[q][k].ok){
+                                    linecompleted = false;
+                                    break;
+                                }
+                            }
+                        }
+                        if (linecompleted){
+                            boardwon[b] = true;
+                            
+                            var allwon = boardwon.reduce((allwon, current) => current && allwon, true);
+
+                            if (allwon){ // if all won, then this is the last
+                                // compute sum of unmarked
+                                var sum = 0;
+                                for (let q = 0; q < 5; q++){
+                                    for (let z = 0; z < 5; z++){
+                                        if (!board[q][z].ok)
+                                            sum += board[q][z].value;
+                                    }
+                                }
+                                var totalval = sum * v;
+                                console.log(totalval);
+                                break playgame;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}

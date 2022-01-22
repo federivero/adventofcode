@@ -1,0 +1,13 @@
+var lines = temp1.innerHTML.split("\n");
+var count = 0;
+for (let i = 0; i < lines.length - 1; i++){
+    var parts = lines[i].split("|");
+    var finalpart = parts[1];
+    var digits = finalpart.trim().split(" ");
+    for (let d = 0; d < digits.length; d++){
+        var digit = digits[d];
+        if ([2, 3, 4, 7].indexOf(digit.length) > -1){
+            count++;
+        }
+    }
+}
