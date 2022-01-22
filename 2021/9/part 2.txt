@@ -1,0 +1,60 @@
+https://adventofcode.com/2021/day/9/input
+
+var lines = temp1.innerHTML.split("\n");
+var map = [];
+for (let i = 0; i < lines.length - 1; i++){
+    var line = lines[i];
+    map[i] = [];
+    for (let j = 0; j < line.length; j++){
+        map[i][j] = parseInt(line[j]);
+    }
+}
+
+var basins = [];
+for (let i = 0; i < map.length; i++){
+    for (let j = 0; j < map[i].length; j++){
+        let ismin = true;
+        var val = map[i][j];
+        if (i > 0){
+             ismin = ismin && (val < map[i-1][j]);
+        }
+        if (i < map.length - 1){
+            ismin = ismin && (val < map[i+1][j]);
+        }
+        if (j > 0){
+             ismin = ismin && (val < map[i][j-1]);
+        }
+        if (j < map[i].length - 1){
+            ismin = ismin && (val < map[i][j+1]);
+        }
+        if (ismin){
+            var basin = { i: i, j: j, count: 0 }
+            basins.push(basin);
+        }
+    }
+}
+
+// change map structure
+for (let i = 0; i < map.length; i++){
+    map[i] = map[i].map((m) => { return { visited: false, value: m } });
+}
+
+var recursivecheck = function(map, basin, i, j){
+    if (i >= 0 && j >= 0 && i < map.length && j < map[i].length && !map[i][j].visited && map[i][j].value < 9){
+        map[i][j].visited = true;
+        basin.count++;
+        recursivecheck(map, basin, i-1, j);
+        recursivecheck(map, basin, i, j-1);
+        recursivecheck(map, basin, i+1, j);
+        recursivecheck(map, basin, i, j+1);
+    }
+}
+
+for (let i = 0; i < basins.length; i++){
+    recursivecheck(map, basins[i], basins[i].i, basins[i].j);
+}
+
+basins.sort((b1, b2) => b2.count - b1.count);
+
+// pre: there are more than 3 basins
+console.log(basins[0].count * basins[1].count * basins[2].count); 
