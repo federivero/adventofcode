@@ -1,0 +1,96 @@
+https://adventofcode.com/2021/day/13/input
+
+var lines = document.body.children[0].innerHTML.split("\n");
+lines.pop();
+
+var positions = [];
+var instructions = [];
+for (let i = 0; i < lines.length; i++){
+    var line = lines[i];
+    if (line.indexOf("fold along") == 0){
+        line = line.substring(11);
+        var inst = line.split("=");
+        instructions.push({ axis: inst[0], line: parseInt(inst[1])});
+    }else if (line.indexOf(",") > -1){
+        var pos = line.split(",");
+        pos = pos.map((p) => parseInt(p));
+        positions.push({x:pos[0], y:pos[1]});
+    }
+}
+
+var maxx = 0;
+var maxy = 0;
+for (let i = 0; i < positions.length; i++){
+    maxx = Math.max(positions[i].x, maxx);
+    maxy = Math.max(positions[i].y, maxy);
+}
+
+var dotexists = function(x, y, positions){
+    for (let i = 0; i < positions.length; i++){
+        if (positions[i].x == x && positions[i].y == y){
+            return true;
+        }
+    }
+}
+
+var foldcount = instructions.length;
+var oldpositions = positions;
+for (let f = 0; f < foldcount; f++){
+    var fold = instructions[f];
+    positions = [];
+    for (let i = 0; i < oldpositions.length; i++){
+        let p = oldpositions[i];
+        if (fold.axis == "x"){
+            if (p.x < fold.line){
+                var newx = fold.line + fold.line - p.x;
+                if (!dotexists(newx, p.y, oldpositions)){
+                    positions.push({x: newx, y: p.y});
+                }
+            }else if (p.x > fold.line){
+                positions.push(p);
+            }
+        }else if (fold.axis == "y"){
+            if (p.y > fold.line){
+                var newy = fold.line - (p.y - fold.line);
+                if (!dotexists(p.x, newy, oldpositions)){
+                    positions.push({x: p.x, y: newy});
+                }
+            }else if (p.y < fold.line){
+                positions.push(p);
+            }
+        }else{
+            console.error("problem in axis");
+        }
+    }
+
+    // now recalculate all positions
+    for (let i = 0; i < positions.length; i++){
+        var pos = positions[i];
+        if (fold.axis == "x"){
+            pos.x -= (fold.line + 1);
+        }
+    }
+
+    oldpositions = positions;
+}
+
+// sort and print
+positions.sort((p1, p2) => {
+    if (p1.x == p2.x){
+        return p1.y - p2.y;
+    }else{
+        return p1.x - p2.x;
+    }
+});
+
+var squareSize = 10;
+for (let i = 0; i < positions.length; i++){
+    var d = document.createElement("div");
+    d.style.position = "absolute";
+    d.style.width = squareSize + "px";
+    d.style.height= squareSize + "px";
+    d.style.backgroundColor = "blue";
+    d.style.top = (positions[i].y * squareSize) + "px";
+    d.style.left = (positions[i].x * squareSize) + "px";
+    document.body.appendChild(d);
+}
