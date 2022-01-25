@@ -1,0 +1,59 @@
+var content = document.body.children[0].innerHTML;
+content = content.replaceAll("&gt;", ">");
+var lines = content.split("\n");
+lines.pop();
+
+var string = lines[0];
+
+var rules = [];
+for (let i = 2; i < lines.length; i++){
+    var line = lines[i];
+    line = line.split(" -> ");
+    var rule = { string: line[0], extra: line[1]};
+    rules.push(rule);
+}
+
+var stepcount = 10;
+for (let step = 0; step < stepcount; step++){
+    var pairs = [];
+    for (let i = 0; i < string.length - 1;i++){
+        pairs.push(string[i] + string[i+1]);
+    }    
+
+    var newstring = string[0];
+
+    for (let i = 0; i < pairs.length; i++){
+        for (let j = 0; j < rules.length ;j++){
+            if (pairs[i] == rules[j].string){
+                newstring += rules[j].extra;
+                break;
+            }
+        }
+
+        newstring += pairs[i][1];
+    }
+
+    string = newstring;
+}
+
+var map = {};
+for (let i = 0; i < string.length; i++){
+    var char = string[i];
+    if (!map[char])
+        map[char] = 0;
+    map[char]++;
+}
+
+var sizeArray = [];
+var keys = Object.keys(map);
+keys.forEach((k) => {
+    var occurrences = map[k];
+    sizeArray.push({ letter: k, size: occurrences });
+});
+
+sizeArray.sort((s1, s2) => s2.size -s1.size);
+
+let largest = sizeArray[0].size;
+let smallest = sizeArray[sizeArray.length - 1].size;
+
+console.log(largest, smallest, largest-smallest);
