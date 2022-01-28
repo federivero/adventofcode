@@ -17,7 +17,7 @@ fs.readFile('input.txt', 'utf-8', (err, data) => {
 
 	let size = lines.length;
 
-	let steps = 2;
+	let steps = 50;
 	let pixelsPerStep = 3;
 
 	let sizeEnlargement = steps * pixelsPerStep;
@@ -78,8 +78,9 @@ fs.readFile('input.txt', 'utf-8', (err, data) => {
 		return newPicture;
 	}
 
-	picture = enhance(picture);
-	picture = enhance(picture);
+	for (let i = 0; i < steps; i++){
+		picture = enhance(picture);
+	}
 	printPicture(picture);
 
 	// count lit
