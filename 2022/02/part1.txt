@@ -1,0 +1,19 @@
+let lines = temp1.innerHTML.split("\n")
+lines.pop();
+
+let score = 0;
+for (let i = 0; i < lines.length; i++){
+    let play = lines[i].split(" ");
+    let elf = play[0];
+    let mine = play[1] === 'X'? 'A' : play[1] === 'Y'? 'B' : 'C';
+    score += mine.charCodeAt() - 'A'.charCodeAt() + 1;
+    if (elf === mine){
+        score += 3;
+    }else if (mine === 'B' && elf === 'A'){
+        score += 6;
+    }else if (mine === 'C' && elf === 'B'){
+        score += 6;
+    }else if (mine === 'A' && elf === 'C'){
+        score += 6;
+    }
+}
