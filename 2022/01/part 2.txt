@@ -1,0 +1,15 @@
+let lines = temp1.innerHTML.split("\n")
+let current = 0;
+let totals = [];
+for (let i = 0; i < lines.length; i++){
+    if (lines[i] != ''){
+        let num = parseInt(lines[i]);
+        current += num;
+    }else{
+        totals.push(current);
+        current = 0;
+    }
+}
+totals.sort((a,b) => b - a);
+console.log(totals)
+console.log(totals[0] + totals[1] + totals[2])

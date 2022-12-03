@@ -1,0 +1,14 @@
+let lines = temp1.innerHTML.split("\n")
+let max = 0;
+let current = 0;
+for (let i = 0; i < lines.length; i++){
+    if (lines[i] != ''){
+        let num = parseInt(lines[i]);
+        current += num;
+    }else{
+        if (current > max)
+            max = current;
+        current = 0;
+    }
+}
+console.log(max, current)
