@@ -227,8 +227,13 @@ let instStr = parts.slice(1).join("").split("\n").join("");
 let h = map.length
 let w = map.reduce((max, l) => Math.max(max, l.length), 0)
 
+
+// 0 = right
+// 1 = bottom
+// 2 = left
+// 3 = up
 let side = 4
-// let side = 50
+/*
 let rowWraps = [
     { left: { dir: 1, sqx: 1, sqy: 1, invCoords: true, invx: false, invy: false }, right: { dir: 2, sqx: 3, sqy: 2, invCoords: false, invx: true, invy: true } }, 
     { left: { dir: 3, sqx: 3, sqy: 2, invCoords: true, invx: true, invy: true }, right: { dir: 2, sqx: 3, sqy: 2, invCoords: true, invx: false, invy: true } },
@@ -239,8 +244,11 @@ let colWraps = [
     { up: { dir: 1, sqx: 2, sqy: 0, invCoords: false, invx: true, invy: false }, down: { dir: 2, sqx: 3, sqy: 2, invCoords: false, invx: true, invy: true } }, 
     { up: { dir: 0, sqx: 2, sqy: 0, invCoords: true, invx: false, invy: false }, down: { dir: 2, sqx: 3, sqy: 2, invCoords: true, invx: false, invy: true } },
     { up: { dir: 3, sqx: 1, sqy: 1, invCoords: true, invx: true, invy: true }, down: { dir: 0, sqx: 2, sqy: 0, invCoords: false, invx: true, invy: true } },
-    { up: { dir: 3, sqx: 1, sqy: 1, invCoords: true, invx: true, invy: true }, down: { dir: 0, sqx: 2, sqy: 0, invCoords: false, invx: true, invy: true } }
+    { up: { dir: 2, sqx: 2, sqy: 1, invCoords: true, invx: false, invy: true }, down: { dir: 0, sqx: 2, sqy: 0, invCoords: false, invx: true, invy: true } }
 ]
+*/
+
+// let side = 50
 
 let x = 0;
 let y = 0;

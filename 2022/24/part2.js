@@ -32,9 +32,13 @@ const lines = input.split("\n");
 
 let h = lines.length
 let w = lines[0].length
-let target = { r: lines.length - 2, c: lines[0].length - 2 }
 let start = { r: 1, c: 1 };
 let minute = 0;
+let targets = [
+    { r: h - 2, c: w - 2 },
+    { r: 1, c: 1 },
+    { r: h - 2, c: w - 2 },
+]
 
 let maps = [];
 
@@ -57,7 +61,7 @@ function generateMaps(){
         }
     }
 
-    const minuteLimit = 2000
+    const minuteLimit = 4000
     for (let minute = 0; minute < minuteLimit; minute++){
         let map = [];
         for (let r = 0; r < h; r++){
@@ -111,18 +115,18 @@ function generateMaps(){
 
 generateMaps();
 
-function hfunc(r, c){
-    return target.c - c + target.r - r
+function hfunc(r, c, targets, index){
+    return Math.abs(targets[index].c - c) + Math.abs(targets[index].r - r) + (targets.length - 1 - index) * (w - 3 + h - 3) 
 }
 
-let currentCost = hfunc(start.r, start.c);
+let currentCost = hfunc(start.r, start.c, targets, 0);
 let evaluating = []
-
-evaluating[currentCost] = [{ minute: 1, cost: 1 + currentCost, r: start.r, c: start.c }]
+console.log(currentCost);
+evaluating[currentCost] = [{ minute: 1, cost: 1 + currentCost, r: start.r, c: start.c, currentTarget: 0 }]
 const evaluated = {};
 
 function insertEvaluating(entry){
-    const key = `m-${entry.minute}r-${entry.r}c-${entry.c}`
+    const key = `ct-${entry.currentTarget}m-${entry.minute}r-${entry.r}c-${entry.c}`
     if (evaluated[key])
         return
     evaluated[key] = true;
@@ -132,6 +136,18 @@ function insertEvaluating(entry){
     evaluating[entry.cost].push(entry)
 }
 
+function moveToSafe(entry){
+    if (entry.currentTarget === 1){
+        entry.minute += 1;
+        entry.r++;
+        entry.cost = entry.minute + hfunc(entry.r, entry.c, targets, entry.currentTarget)
+    }else if (entry.currentTarget == 2){
+        entry.minute += 1;
+        entry.r--;
+        entry.cost = entry.minute + hfunc(entry.r, entry.c, targets, entry.currentTarget)        
+    }
+}
+
 let finished = false;
 while (!finished){
     while (!evaluating[currentCost] || evaluating[currentCost].length === 0){
@@ -139,46 +155,75 @@ while (!finished){
     }
     let next = evaluating[currentCost].shift();
     next.minute++;
+    const target = targets[next.currentTarget]
     if (maps[next.minute][next.r][next.c] === "."){
         // evaluate stay
         let copy = { ...next }
         copy.cost++; // add 1 due to minute
-        insertEvaluating(next);
+        insertEvaluating(copy);
     }
     if (next.r > 1 && maps[next.minute][next.r - 1][next.c] === "."){
         // eval move up
         let copy = { ...next }
         copy.r--;
-        copy.cost = copy.minute + hfunc(copy.r, copy.c)
+        copy.cost = copy.minute + hfunc(copy.r, copy.c, targets, copy.currentTarget)
         insertEvaluating(copy)
+        if (copy.r === target.r && copy.c === target.c){
+            copy.currentTarget++;
+            if (copy.currentTarget === 3){
+                console.log("found target at cost ", copy.cost + 1)
+                finished = true;
+            }else{
+                moveToSafe(copy);
+            }
+        }
     }
     if (next.r < h - 1 && maps[next.minute][next.r + 1][next.c] === "."){
         // eval move down
         let copy = { ...next }
         copy.r++;
-        copy.cost = copy.minute + hfunc(copy.r, copy.c)
+        copy.cost = copy.minute + hfunc(copy.r, copy.c, targets, copy.currentTarget)
         insertEvaluating(copy)
         if (copy.r === target.r && copy.c === target.c){
-            finished = true;
-            console.log("found target at cost ", copy.cost + 1)
+            copy.currentTarget++;
+            if (copy.currentTarget === 3){
+                console.log("found target at cost ", copy.cost + 1)
+                finished = true;
+            }else{
+                moveToSafe(copy);
+            }
         }
     }
     if (next.c > 1 && maps[next.minute][next.r][next.c - 1] === "."){
         // eval move left
         let copy = { ...next }
         copy.c--;
-        copy.cost = copy.minute + hfunc(copy.r, copy.c)
+        copy.cost = copy.minute + hfunc(copy.r, copy.c, targets, copy.currentTarget)
         insertEvaluating(copy)
+        if (copy.r === target.r && copy.c === target.c){
+            copy.currentTarget++;
+            if (copy.currentTarget === 3){
+                console.log("found target at cost ", copy.cost + 1)
+                finished = true;
+            }else{
+                moveToSafe(copy);
+            }
+        }
     }
     if (next.c < w - 1 && maps[next.minute][next.r][next.c + 1] === "."){
         // eval move right
         let copy = { ...next }
         copy.c++;
-        copy.cost = copy.minute + hfunc(copy.r, copy.c)
+        copy.cost = copy.minute + hfunc(copy.r, copy.c, targets, copy.currentTarget)
         insertEvaluating(copy)
         if (copy.r === target.r && copy.c === target.c){
-            finished = true;
-            console.log("found target at cost ", copy.cost + 1)
+            copy.currentTarget++;
+            if (copy.currentTarget === 3){
+                console.log("found target at cost ", copy.cost + 1)
+                finished = true;
+            }else{
+                moveToSafe(copy);
+            }
         }
     }
 }
