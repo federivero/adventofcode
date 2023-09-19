@@ -1,5 +1,26 @@
-var lines = temp1.innerHTML.split("\n");
-lines.pop(); // remove white line
+const input = `5651341452
+1381541252
+1878435224
+6814831535
+3883547383
+6473548464
+1885833658
+3732584752
+1881546128
+5121717776`
+
+const sample = `5483143223
+2745854711
+5264556173
+6141336146
+6357385478
+4167524645
+2176841721
+6882881134
+4846848554
+5283751526`
+
+var lines = input.split("\n");
 
 var jellyfish = [];
 for (let i = 0; i < lines.length; i++){
@@ -27,10 +48,10 @@ var triggerlit = function(x, y){
 }
 
 // now pass steps
-let stepcount = 100;
-var litcount = 0;
+let stepcount = 100000;
 for (let step = 0; step < stepcount; step++){
-    
+    var litcount = 0;
+
     // add 1 to every 
     for (let i = 0; i < gridsize; i++){
         for (let j = 0; j < gridsize; j++){
@@ -50,6 +71,9 @@ for (let step = 0; step < stepcount; step++){
             }
         }
     }
-}
 
-console.log(litcount)
+    if (litcount == 100){
+        console.log("all flashed at:", step + 1);
+        break; 
+    }
+}
