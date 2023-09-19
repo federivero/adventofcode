@@ -1,94 +1,222 @@
+const input = `...v.>...v...>.v....v..vv.vvv>v>.v.v>..>v>..>.>.>v.v.>>...>>..v.vv.v.v.v..>>.>>v..v>..>>v.vv>v.>......>v>.v...v>..>...>v>v>>.>.v>>.v>>..v>.
+..>.v.vv.>.v.v.....>.>>>.>...v..v...v.>v>vv.v...v...v.>....v...v..vv.>..>..>v.>.>v.v.vv......v>vv.>..vv.v>>.v>v.v....>..v>v.v.>v.v>.v.v>v.>
+>..>>v...v.>..v>...v>..>>>v...>>.v>.v..>v.>vv>.>.>v..vv.>.>v..v.>vv>>v..vv..>..vvvv.vv>.........>>..>.>.>.v>..>v.v>...>v...vv..v.>.>.>>.v..
+>>.>vv..>v>.....>.>..>vv..v...vv.>>>.>vv.v.>vv...vvvv......v.....>..v....v>...>...>..v>...v.>.v..>>.v>.>..>v>v>....>v....>.....vv..v.vvv...
+v>...v>>v>.>.....v...>.>>..>>>v....v..v.vv.vv..>.>..vv.v>v>>.>>vv>..vv>.v>...vv...>..v>....v....v>.>>...v>..>>vv>.>.v>v>......>v....v.v>v.>
+..>.vv.v.>..>vv>v..vv>....>v.v..vv..v>...v......vv>..>.>>.>v....v>v.>>.....v.>v.>vvvv>v.v>..>.v.>>...>......v>v.>vv...>v>..vv>v>>..v>>.v>>.
+vv..>.>vvv.>v.v>....v..vv.v.>..v.v.>>v.v....>..v>>...v.>..vv.>..v..>>>v>>>...>...>v>.v>vvv...v.....>.>.v.......>..>v..v.>.>..v>v>v.>v....>.
+.v>..v..>>..vvv..>.v>.>vvvv.>......v.>v.>.>v>vvvv.>v..v..>..>v...>v.v..>....>>.>v.vv>..v>.vv.v..v.>..>.vvvvv>......vv..vv..v>>v...>v>.>..>.
+.v.v..>>>>.v.....v>...v>v.>>..>>.vv....>.v>.vv.v....vv>vv.>>....v..v>v..>.>>..v..v>v...>v>..v..>.......>>.>..vv....>v....>...>>>>v.>>...vv>
+>>>>>.vv.......>>...v..v..v>v>>>....v....v..v.>.>....>..v>v.>vv...v>...>..>.....>v.>>.v>>.>.....>..vv.>.v.v>>v....v>.>v>..>>.v>v>>>vv...>>>
+..v.>.v...v>.>.>v.v..v>..v.>>v.v.v>v.>vv>.>.v...vv..>...>v>v>>vvv.>vv..v..v>.vv.>.v...>>..v>.>>.....v.vv>v>>.v>v>>v..v..vv.v..>.v.>vvv..>.v
+v>..>>v.>....v.v>.>vv..v.>.v.>.v.v..v......>v>vv.>>.v..>..v..>.vv.>vv.v>>......v.v>>.v..v>v.>v..v.>>....>...vv..vvv..vv.>.vv.>>>.......vv.>
+v.v>.>..>.v..>>vv......>...>v>v.v.vv..>>>.>..vv>v..>...>.vvvv.v..v..>v>v.>.v.>..v..>...vv.v..v.>>....>.vvvv..vv..v.>.v>.v.vv.>.v....v.vv>.v
+...v..>.>v.vv>..>>..>.vv..vvv>.>.>...>.>v>vvv>.>v>>vv>....v>...>>>v.v>>>..v>......>>..v....>v....>.vvv>>v...v..>..vvv....>v.>.vvvv>.vv.>v.>
+v..>....v>...>..>..>.>>.>vvv>.v.>vvv.v...v.>v.v>>.>>v.>.v>..v>vv.>.v>.v..>.>..>...v>...v....v.>.....v.>.vv>>.vv>>v...v..v.>vv>..>>.vvv....v
+v.vv>.vvv>.v>v>vvv.v>>.>...>v.>v.>.v.>.>..v.>>..>...>.v.vvv..>>>>>.v..v.>..>>......>.>..>v..v.vv..>.v..vv>.>>>.v>vv......>..>.v>v..v....v>>
+..v>>...v.v.>>>..v.vv>..>.>.v>..>.>.vvv...v...>>>............vv.v>v>.v.>>v..>v...v........>...>vv...v......>...vv....>>>.v>.vv...>.vvvvv..>
+.v>>....>....vv.vvv..>>....v>..v>vv...vv>.>v.v>vv..v>vv>>.vvv..v>..>v..>v...v...v.v...>.v.v.v.v...v.>>>...v...v......>>v..>...vv>.>.>..v...
+v.>...v>>...>>.>....v.>vv....v..>v..vv>..>vv.vv.v.v...v......>...>v>v.>.>>vv.>.>.v.v.>>v..>...>.v>v.>.v>v.v.v>.vv.>...v>>...v>v..vv>.v..v..
+vvv>>..>>>.v....v.v...>v.>>v..v...v>.vv>v..v...>...>.>v>vv..vv.v>.>v..>>v..v..vv.v>..v.>...v....vvv>.>..v>v>>..>.>v......v...>v..>.v..v.vv.
+>vvv..v.>..vv....>..>v..>..>..>>>.>.....>>..vvvv.>.vv.v>v.>.vv...v..>>v.vv..>v..v..>..>..>.v.v...vvv.>..vv..v>......>.v..v.vv>>..>>..>...v.
+.v..v>.v...v.>>>v.>.>>>v.vvv..v.v>>..>v........v>.>v>.>....>>....v..>v>.>>>....>v>v..v.>.>.v>>.v.>v.>>v..>>..>>...v.vv>v..v>v>.>>.v>v>>>v.>
+v....v.>>>.>>..>vv>>...>v.>....v.v...v..v..>vv.v..v>v>vv..>>>v.v>v>>>vv>.>.>>.>.vv.v>vv....>.>>>>>>vv..v.>vv....v..v.......>vv.v..v...>..vv
+v..>.vv.v.v>.....vvv>>.>v>.v.>.>>>>>....vvv..v>.....v>vv.v>.>>......>...>vv>v>v.>>..v.....v.vv..v.>>v>..v>.>>vv.>v.vv...>.>v.v.v.>v..v..>v.
+..vv....v..v.>>......>.>v..>>v.>..>.>...v.>v>vv>..>.>vvvv..v.v...v.v>>vv.>..>..>>>v..>>v>.v>.....>.v>v>..>...v.v.v...v.>v>>.vv.>....v....v>
+>.v>>.>.>.v.v.....v....>..vv>>vv.v.vvvv>>...v>.>>..v..v>vvvvv.vv.>.v....>.v..vvvv>vvv.vv.v.v.v.>v.>.v.>>v>vv.v..v>.>.....>.>>..>>>vv>.>v>v>
+v.v.v>.....vv>>.v..v.>.v>.v>..>.v..>...v....>.>.>v>v..>v.>.v>>.>v....v.....>vv>>>..>..v...v.v>vv>v>.v>...v.>v...>.>>>.v.vv>.>..>>v.v.vv.v>v
+v>.vvv..v.v.>...>>...vvv...>v.v..>...v.>>.v>v..v...v...>.vv.v>.>.>>v>....>.v>v>vv.vv..>v..>......vv.>.>..v.v..>.vvv.>vv.>>.vv>.vvv.v>.>>>v.
+..v>v..>v.>..v.v.v>v>.v.>v>>>..>.>..>v>>v...>>v.vv..v>.>>...>v..>.>v.>..v.>>.v.>>vvvv..v>>..v>.>........>>>v.>..>v..vvv.vv..>v>>>v..>v>...v
+........>v.>......vv..>..v.....v..>v..v>.v>>.>>vv..>...>vv>......vv>.....v>..v...>v>v.v.>vv.vv.>......>.v.>.>>...>...>..>>>>.>vvv....>v..v.
+v...>v>..>v..v.....v.v>>v>>.>v.>>>v.v>>>v>...>.....vv.>>...>.v.v.vvv>>>v.v.>.v>.>.vv>...>.vv>..v..v>..>v>.vv.vv>..>.>.>..vv....v.>....>.vv.
+v>>.v...v.>..>>...v.v.v.vv>..v>.v.v>.v..>>>.vvv.v.>.v.>v.v....v>>v>v.>vv.....>vvv..>>v>v>>..vvv.>.>....v...>>.>..>.v...vv..v>.>>..v.vv>>...
+>v...vv>....v>>..vvv..vv..>>>>.>>>v........v.v.v.v..v.v..>>>.>.vv>v.>..vv>.>>.>.>vv.>..>>>>.>..v>.>.v...>..v>>..v>..>..vv>.>..>v.v>>.v.>.>.
+.v..v>.v>.>>v>..v...>v.v.v.>.v.>..v.>.v>>>....vv>>.>...>.>>v.v>...>....v...vv>.vv.vv.v.......>..>>vv>>>>....v>>.>v>.v>v>v>v..v>vv>....>....
+>vv>v..>...vv>....v.>.vvv.v.v.>..>..>..>..>>vvv..>v.v>v>..v>>.v>>.v..>v..vv>.v...vv..>v.v...v...>.v.v>.>v>>>vv>v..vvv>.>v...>>>.>..>......>
+....v>......>>>.>.v.>.>v...>v>......v..>>>.>.v.>vv>v.vvv>>.>...vv.vv.v.v..>>.vv..v>..>>vvv>.>....vv>..v>.vv>v.v..>vv.v..v.........v....>v>.
+>...>vv>v..>>.v>.v...v.>.>.v>.....>>>vv>v.>.>>.v..>.>>v..>>>............v.v.>.>..>v..>.>v..>>v>v>v......v>.v...>v>.>....>.>..vv..v..>v>....
+..v..>......>v>v..>>.>..v...v>>vv...>v...>>>..v.v..>>v..>.>>.v.>vvvv>v>>v.>>..>v.vv.v>.>.vv.vv.v.>..>>....>v....>>v>v>.vv>..>.v.>..>.v.>>..
+v...>v>.vv..>.vv.v.>v..v.v.>>vv..vv.v..v..vv.>.v.v.>...>>>...vv..>.v>..>>..>>>v.>vvv..v...vvv..>.v>.>>..>v.....v>.v..>v.>.>v.>...>..>...vvv
+.v.>.>.......>.v..>.v>vv>>v.>v...v.>>v.....>.>>.v>>...>v>.>vv.vv..>..>>v.>....v.....>>vvv.>....>.>.>v.v>.>.>.>v>....v.....v.>...>..v>v>.v>v
+vvv...>....v.>v>.>v.v.vv...v>..>..>>>v>.>..v..v>..v.v..>>.>.>>.v.v..v....vv>...........vv...v...>>...>.>...vvv..>v>>>v...vv.>.v>..>...v>vv.
+..v.>v....v>>.vv.v..>.v.v..v>..v.v.v....v.v.>....v>v..v..vv.>>>......v.>>...v>..v.vv.v.v.v>v.>>.>>.>>vv>.vv>v.>..v.v.vv...v.>>v.vv.>.v.v.>v
+v.....vvv.vv>>...>v..vvvv..>....>>..v.v>>vvv>.v..>>v...v.v.vvv>.>..v.>vv...v.......v.vvvv..>.v>>.>.>.>>>.>..v....>>.>v..>...>>>v..>.>vv..v.
+>v.>>.v.v>>.v.v>...v>..v......>v.>.v..>v.v>..>v.vv..v>v>v.>..>v>vv....v.vv>..>v>v.vv.....v.>.v>>vvv..vv>.v..>>>>>v.v>v...>..>.>>v..>>v...v.
+...>.>.>..v>.v.v>vv.v.....v.v..v>>.>>>v...v....v>v>v>>..v>..>>vv>.vvv.v>vv.v.v..v.vv.vvv>>.>v.>>.>>.>v.v...>v...v>.>>.>..vv>v.>v>.v>vv.>.>>
+..>.v.v.vv.v.>v>....v>>>vv.vvv.>vv>.v.v>..v>...>..v>..>...v.>.v.v.v..v.>v>>...>>...>.>>v>..>>v>>.v.vv>>..v.v.vvv.v...>..>>>>....>vv.>..v..v
+>v.>v..v.>>.>v.>....vv.v..>v>.vv>vvv>..>...>.v.>....>.>>....v.>>>..>.>.>.v.>..vv>vv>..v..>...>v>.>>v.>.>>.>...vv>.v.vv>v.vv....v...>......>
+..>v>.>.>.>>v>v.v......v.>vv.>>..v.v.vv.>.>vv..v..v.....v>.v.>vv>vvv.vvv>>>.>vv.v>>v.>v...v>>v>.v>>..>>.v>.>.>>.>>>vv>>.v>>>..>.v>....v..>.
+..>.v...vv.....vv>>vvv>....>vvv..v.v.vv>vv..>vvv.v...>.v>>>.....v>..>..>vv...>>.>>.vv>.v.>>.v>.>>...v.v..>.v..vvv....>>v...>v.v..>.v>v.>v..
+.>...>..vvv.v....>..>v.v..>>..>.>.>.>.v.>>.vv.v>v..>.>v>vvv>...v....vvv..v>>..v>>.>>..>.>..v>>v>>.vv...v>.>>.>>..v.v.>.v.>v..v.>>vv.v.>..v>
+vv>v..>v......v.v..>vv.>>.>..vvvv.v.v..>..>.vv..>..>vv...>v..v.v.>v.vvv>>.....v>>.>...vv.>>>v..>v.vv..>>v..v.vv.>>vvv......v.>.>>..>..>...v
+..>...v.>.v>>..v>v>......>..>v.>>.>>.v.v...v..vvv.>......vv>v>.v....v..v.v..vvvv...>>>...>.....vv....>>.v>.v...v>.v.>.>vv.v..v>.>>v>>.>>..v
+v>.v.v.>>....>>.>>.>.>.>>.vv...>.>>vvv.v>>....>.>..v>...>.>>.....>.>v.vv.vv>v>..vv.>>.....v....>v..v..>..>v.v.>....vv...>.vvv.v.>v....vv...
+...v..>....v..v..v.v....>.>.v..>>..v.v..vv..>>.>...v>>..>.vv...>...>....>.v...v>v...>...v.>>.>v.>.>.>.vv..>.>vv.>.v..v.>>>v>>>v..v.v...v>..
+.>..>>v>..>>.v.v.>v...v....v>vv..v>.>>>.v..v...v.>..>...>.>v>v.>>.>..>>v..>.vvv.v.v.v>..>>.>v.>v...vv.>>v>v...>>.>.....>.>v..>.>.>v>>..vvv.
+.v>vv.>v...>>.>>..v.>>.>>..v>...v>.v>>...>>.v.v.>..v.>.>v.>.vv>.v>v...v>v..vv>v...>.>>v>>.>...>v>>.v.>v.vv......>.v>v..>>..v.v>>..v>>.>..v>
+.>..v...>v.>>v..>>>...>.>...v>v>v>>v>.v..>v.....>vv>.v.>.>>....v..>v.v....v>v..>.....v..>.v.vvv.....>.v>vvv>..v.......>...v.>>>..>....>>..>
+>>.v>v...>v..>>v.v>.>..vvv>..>..v.>>v>..v>....>.vv..>.>.v..vv>.>....>>v.vv.>>>v...>...>v....v>>vv>.v>..>v.v...>vv.>..>.vv.....v>v.>.v..>vv>
+.>..vv>.>v>v.>>.v>>.v..>>.v.v.v.vv>..>.v>>...v.vvv>...>>vv.>v.v>.>.v>v.vv>..>.v...v>>>.vv.v>..v.>>..vvv...vv.>>.vv.>>v>.v.v.v.>..v>.>v>..>.
+..v.....v>>v.>...>..vvv..>vv.>.....vv>>>.>vv..>..>.>..vvv.>.>>>>>>>v>..>.>>>.....>v..>>v.>.>.>.vv>..v>.v.>v>.>...>..v.>..>.>>...v.>v>...>>v
+..v.>...>>>>.>>.vv.....>>....v>>.>.>.vv.v>v.v....v.>....>v>.v..>>.v.v.v.>v.>vv.>..v..v.vv..v....>>>.......v.v.>....vv>vvv>.>.>>>...>..v>..>
+.......v>v>..>vvv.v..vv..v.>.....>>....v>...>v..v..v..v>...v>..v>v>>vv.v>.>>>..v.>>>>vv>v>..v.vv...>.v..>...>..v.>v...>..>.v>vv.>>.....>v>.
+vvvv>>v.v.v..v..vv..>.vv>v.>>.v>v..v>.>..vv>..>>..v...>v...>...v>...>..v>...vv..>.>>>.v.v>v..>..v.vv..v..v.v...vv>>...>>>>.>v>v.v.vvv>>.vvv
+..v.>v...>.>v>..>.v.>>v>v>......v.v>>v.v.v.>...v..>v>>v..vvv..>...>..v.v..v>v>vv.v>...>v..v.v>.>>>>..vv.v>>.v.v..>>>>v..>.>...>vv>.v.v>.>..
+v>v.>>.........v..v...v>vv>.v.v.v.v.....>...>..v..>v.>.v.>>>v.v>.v..vvv.>v.v..>...>>>>>..>.>vv..>..>>>..>v.>...>.v.v.......>.>vvv.>>v..v>..
+>..>>.v.v...v>>....v..vv.>v.v>vv>vv>.>>.>.v...>.v......>>.v...vvvv.>>v..>v..vvv.v.....v..>>..v>>.v.>>>vv....v>>>>.>.v.v..v>>v.v.v.>vvvv....
+v..>...>>>.v..vv.v............>.v.>>v>.>..v.>v...v...v.v...v.v.vv.>.>v.v..>..v..v.v>.v..>.>.>>v...v>..v..v...>..>>...v>>v....v...v.v..>vvv.
+.>>v..v.vv>..>>..>>>....>.>....v>>.v>.>..v>.>.>.vv...vvv>.......vv......v..v>>...>.>>..v..>>vv..>v.v>.>..>..>>...>.v.>>.>v.>..>.v.v>v.....>
+vv>.>vv>.>>.>..>......>>v>v....vv.v.>vv.v.v...v.v.>>.vv.v>.>>>..vv.>..>>vv.vv.....>>>>vv>...v.>.v>.v.>.>vv.v.v.>v..v>.>>...>v.vvvv>.>>>>...
+>....v>.....vv..v>vv.....v.v>....vvvv..>.>>.vv..vv.>.v>>.v>v.>.v.v>..v.vvv.>>.>.>..>vv..vvvv......vv>vvv.vvv.v..v....>.>vvvv>>v>v.>vv..v.>v
+>>>.v>.>..v>.>.>..vv>>>....vvv>...>vv.>.>.vv.v....>....>.v.....v.>.>.>...v..vv..>......>>>>vvv.....>.vvv..>.vvv>.>>....v..>......>v.....v.>
+...>>..>>.....v.>>.v.>.>>vv>..vv.v.>v>>v..>>>..>vv.v>v>>v.v.vv>.v>.v.v.>.>.>..>.>>>......>>.v....>v.......v..v>.....v>v..>>v.>..>..>v..v>..
+v>>>.v.>.v.....v..>>...>.>>..v...>.>v>..>....>.vv.>>.vv.v..vv>.>.v>...v......>>>v>>>...>>..>v.v..v..>>.vv.>...v...>.v.v.vv>vv.v>v.....>..v>
+.>.>>.....v.v...v..v>...v...vv.v.>.vv...>>>>v.vv.>.vv..v....v.>.v>v..v>>....>>>v..v>.>.v>..>.vvv>.v>.v>>v.v>>...vv.>>>v.v....>>.v.vv.vv.v>.
+..v..v>>vv>.v>..>>....v>>>.>.v>v.vv..>>vv>...>>..>.vv>v.vv>...>.v>>v.>.v...v.v.....>..v.>>.v>.>...v..v.v....v.vvvv.vvvv>..vvv.v.>v..v>>>>>.
+v.v.>.v.>.v>v...>.vv.>.>...vv..>...>.v..>.....v..>>v>v.v.v..v>>....v..vvvv.>..v>.>.v.>.vv..>v>>v>.>....>v.......>>...>>..v...>...vvv....>..
+vv.>.v>.vv.v>>>v>..>>..v.v>..>>>>...>.>vv.>...v>>.>..v....>vv..vv.v.>.v.>vv>.v>.......>.>>.v..>vvv..v>.>>.>>..v>.v>>.v>...v.>v...vvvv.>v.v>
+>..v>>.>v...v.......v...v..>>v.>....>.>>..>v.v>.....>>>.>.v>>vv.....>vv..v..vvv>...vv....v>...>>>.v>>vvv.>>..v...v..>>>....>.>..vvv.vvv.>.>
+>v>.v>.....v...v.v.v...>...vv>...vv.v>.v>>vv>..v.>>>v.>vv>...v....>....>v...vv.>.vvvvv....v.....v.>v.v.>>>.>>..>..v>>>...v.v..>.vv.>v>.v>.v
+.>>.....>...v.>...v...v..v.v.>vv..>v...v.>...>...v...v....>v>>..v>>>.v.v>...>>.>v.v..>>..>...>.v.>....>>...v.......v.v>>>.....v.>.v...v>v.>
+v.....v...vvv..vv>>>...>.v.v>>..>v>>>>.v.....v.v>.>>..>.v>.>vv.v>>......v.>v.>>.vv...v.....v..v.v..>.v>v...v.>.>v.>>.vv>...v.v..>>v.....>>v
+.>vv>v.vv..>>>.>.vv.vv.>.........>.vv...>.v..>.>>.>>..>....>>>...>..>.>v.v.....>v.>>>v>v..v>.>...v....v>.>..>v>>>>>>>vv.v>>v..>..>>>>>v..vv
+..>>...vv..>.v.v.....>.v.v.v>>...vv.....v...vvv...>v>v.v.v...>.>>vv.>.>......vv..vv.>....v.>>v>>v...>v>v>v.>.>.v...>....v>>v>.vv>v>....>.v>
+v>.v.v.v.>>.>v>>.vv.>v>vv..v..v.>v.>>..>v>.v..>....v>.>..>..>v>.>v>.v.......>>v...vv.>>>...>v...v>>vv.v..vv...>.....v>..>>...v...v.>v>.>>>>
+..v...v.>...>>v...v.>>..vv>v.>.v>....vvvvv>....v>v.v.>v.>>>....v.>...>...v...vv...v..>.vv.>.>>>>>.>>.vv.v.......v.v..v.vvv>..>v.>>v>..vv>..
+v.>>>v.>>..>>v.v.v>...>.>vv>.vv....v......v..vv..v.v.v...>.>>v...>>v.>vv>..>.v.>.v.>v.>>>>.vvv>..>.>.>>>>v>.v..vv.>>>>..>.>>>.>.>vv.vv>....
+>....vv.v...vv>.v>>.vvv.v>..v>...>...>.....>..v..>v.>.>>v>.>>....>>>v.>>v.>.....>v>v>...>.>.vv.>v>v...>vv...>v....v..>>v..v...>v>>.>v.>v.>.
+v>>.v>.v.v>..>.vv.vv>...>v....v>...v..>....v>..v.v.>..>.>.>.v>...v..>....>....v>vv..v>>..vv.v>v....v.vvv.v...v>...>.v.>.....>.....vv.v.....
+.....vv>v..>>......>vv.>.>.>v>vvv>.vv..>>vv.v....v>.v>...>..>>.>>>v.>>.>..v.>...>vv>>...vv.>>>....v..v..vv.>.>.>.>...vvv>..>>>v.v...>v.v...
+.>.v.>.v>>...vvv....v.v.v.vv>>>>.>.v...vv...>v..>.vv>>.vv>....v.vv.v.v..>>>vv>>>.>>.>v......>>...v...v.v....v....>.v.>..v.v..vv.>.vv..v>>..
+...>v>v>..>.v.v..>.vvv.>v....>v.>v.>..v>.>.>>>>>v.vv..>>.v>v.>v.>vv..>>>.....vv>...v..>....v..v...>>vv..>>v>.v.>.vv..>.v..vvv..>.>........>
+>.vv.vv.v..>v>..>.>.>.v.v.>.>v.>......v.>>v>...>v.>.v.>..>..vv.......v>..>v>..vv>>v>.....>.>vvvvv.....>.>>....>v.....v..v..v.>>.vvv.v>.v..v
+vv>>..>..v..v.>v.>>..v.>>v..vv>v.>...>.>>.vv>.v.>v>.>>...>vv.vv.>.>..v...>vv>vv>>v>..v>vvv>>>.>....>.>..vv....>..v.>v.>.v..>v...>vv>v.v>.>>
+>....vv>>.v.v.v.>vv..v.>>v...v.v..>v.>>v.v.v>.>>vv....>>..>.v..>.>.v..>....>>...v.v>>>v.>>>.>>...>v....>v..v..>>>>..v..>v>v.>>vv...>v>.>.>.
+>.v>......>.>>....v>>v........>....>....vvvvv>v.v>.vv>>.vv>...vv>..v..>..v.....v....>.v>vv.>.v...v...v...>...>v.v........vv>.v.v.v..v...v.v
+v.v>.>v>v.>>.....v>.v>..v...>>>>>v>>.vvvv.v>..>>>>>...>>.>....>>v.>>.>v>...vv.v>.v..>v.>....>vv>>vvvvv.>v.>..>>..>>...>..vv>...>..>v...v.v.
+...>.>..>.v..>.>>.>.v>.v>.v.v>>>>vvvvv.>.>>v....v........>........>v..>.>v>...v..>.v.>.>.>..>...v....>..>.>.v>v>..v.>......>..>>>...>..v>vv
+..v>vv..>.>.......>.vvv>v..v>>.>.v>>vv.>v>>.v..>v.>.>>v.v.v>vvv....v..v>.>>..>>.v..vv.....>.vv...>v.v....v...>>v....v.vvv.v...v>....>..v...
+v..>>>.>>>.vv>v>>>..v.vv.....v.v>>v.v...>...v.v.vv......vv.>>.v..............>..>....>>..vv...>.v.>..>>>...>>vv.v....v..>.>.v.v...>..>.v...
+...v.>>..v>.>.>.v>..>vv>.>.>...>..>>>>>..>v.>.v.vv>.v.........>...>..>v.......v.v..v.v>v>>>>v.v.>...>>>...>.>.vvv.vv..>>.vv..>.vv..>>>....v
+.v.>..vv..vvvvv.vv...>v.vv.....>.v>>..>>vv.>.>....>v...>...>vvvv...v.>.>>...v.>>v.>v>>.>.vv>>vvv>.>...>>..>..v...v>..v.>..vvv>>.>>.v.v.v>>>
+..>.......>.v.v..v>vv>>>.>>..v.v>...>vv.....>>......>..v.vv.v.v.>>..v...>.v.v...>.v>>v...>..>v>>.vv>>>v>v.v....vvv.v....v.>v>>.>....v>>>..v
+...>...>.>.>v..>v>......vv>vv>.>...v...vv.....>>>>>...vv>vv..v>.vv>vv...>...vv..>.>..v>vv...>..v..v.>.v..v........v>.>>......>.v.>.v.......
+..v>.....>>.v..vv..v......>..>...>v>....v..v.>>..>v..>.>.v>.>>..v..>>>>>.v>>>.v.>>..>....v.....>.>v>.vv>>v>.v.v.>>.vv..v..v..v..>.>>>.>>vv.
+.>>.>>.>...v>v..>v.>..vv>>.>.v.>>>.v>>v.>>v.>>>..v...v>..>..>>>vv>>.v..>v....v.>>.v.v.....v>...v>.>......v>...v..>>....v..>>v.v....v..v>>>.
+...v..>.>..>..v>>>v.>v.vv..v..vv..v.....v.>>v>v..v.v.>..v>v>>.....>....vvv..>..v.>...>...>>>v.>.v..v>.>>.>.v>>..>..v>v>..v.vv.>>v>.>..vvv.v
+v>.v..v..>>v>v.vv>...vv>..v>.>.vv..>..>vv>>>>.v>....vv>.>.vv....>vv...>>.v.v.vv......v.....v.vvvv.....>..v..v.>>v.>.....v>v.>v>...v>.>.v.v.
+..v..vv.>.v.v..>>>v..vv>v..vvv..v.vv..v..>..>v.>>.v..>.>...vv>..vv..v.....vvv..>>..v>v..v.>....>vv.>.v>..v....>.>v..v.v..>.>.v...>>.>.>....
+.>>.>v..vv.>v...>>v..>...>>......vv...>.v>.v>...v....vv..vv.>>>.v>>..v>v..v.v.>>.>>.>...>..>......>>v..v.>..>...>vvvv.v.v...>v.>v>>...>>v>.
+v.>v..v>...>v>..>.>...>v.v>...>>.vv.....v...>v.vv...>>.>.>..>>>.....v>vv..>.>v.>..>...v>..>.v>>...>.>..v.v.v...vvvv..>..v....>..v..v.v>>>>.
+v>vv.v...v.v.....vv>.v..>>v.....>...v..v.>>>v.....>v>.>>..v>v.vv.>v..>v...vv.>v.>..v>....v.>>vv>..v.>>>v>.>>>>>.>vv>vv>>>>>.>>.>v.>v.>v..>.
+.>.>>>.>.>v..>v.v.vv>.v.v>v........>>v>>>..vvv.>...v...>.>..>.>.vv..vvv...v>.v.>vv>v>.v>.....>.>v......>>...vv>v>.>>..v.>..v.>vv..>>..v.vvv
+.v.v......v..v..v.....v.>....v.v>v.v>>.v.v>.v..v.v>vv...>>.v..>v.>.v..vv..>...vv..>>.v.v>.>...v>.....>v>>........v...>>.......>.v..>.>>..v>
+>vv.>v>....>..v..>>v>v.>>v....v>>.>v>.>.>.>v.>..v>>..>v..v>>>v...>vv..vv>v..>v..>>.>....v.>.vv..>.v....>..v..>.v...v.>>vvv>v.>.vvv.>>.v.vvv
+v...>vv>v.vv>.vv.>>>.vv.v.>v>.v...v.>>>.>.v.>...v.>.v...vvvvvvvvv>>vvv.v.>.v.v.vv.....v>.vv>..>>>v.>.>.vv.v...>v..v.>...vv...v..v...>.vv..>
+..v>.v>v>v.v..>>...v.>>.v.v.vvv.v.v>....v.>>...>>...>...v..>>>>>>>v...>....v.v.......>>.>v.vv.>..v>vvv>v.>>v>.>.>..v>..v.>..>...v.v>v>...vv
+vv>>.v...vvv..>.v>>v.v...v.v>.>.>.>..>.vv.v.>.v..v.v...v.v.v.>...v.>.>.>>>v.v>....>.>.>...>.>..>v.v>.v>>>..>.....vv>.>.v.>...>v>vvv.>v....v
+...>..>...v>.>....vv..v.v.>.v>.v.vv.>v......>>vv.v..v.>..v.>>v...>.>>.>v>v...>.>vv>..v..>v>>.>....v...vvv..>.>v>vv...>.v>...>v.>.v..v>..v..
+.>...>>.v>>vv.>v>..>>>v.v>v..v..>....>...v>vv......vv.v..vv>>>..v.v.>>v..>>>v.v.v....>..v>..>v.v..>v......>.>v..v>.v.>v.>v.v>.vv>v>.>.vv...
+..v>.>>v..>>..v>>v..vv.v.v.>.>.>.....v...v...>....v.v....>>v>.v.vv.>>.v.>.v.v...v.>v.v>vv...>v>>...v....vv>>>..>..v>>...>>vv>....v..v>..v.v
+>vv.>.v>..>v.>.....>v...v>...>.>..v>.v>...>vv>v>...v.v...v.>vvv...>.v..v.>.v.vv.>.v.........>v>.>v.v...>>.>v....v>.v.>...>v>.>....v..v.v..>
+....>vv.>.v..v>v.v...>v.v...>...>.>.>....>..v...v...>>>.>.vv.>vvvvvv..>>..v.>v.>vvv..v..vv>..vv>..v.v>...>v.vvv.v.v.>.v.>>.>vv>v>..>.v..v>.
+...>v>......>>....>>.>v.....vv.>>..>>.>v.v..vv.vv.>....>vv>...>vvvv>.v>..v.v>..>..>.>v.>v..v>..>.>.>>.>>.v..v..v..>....>..>>v.>.>..v...>>..
+>...v.v..>......>...vv>.....>>>v.......>vvv..>.>..vv>>vv....v..vvv....>>>>v>.>.v>>....v>>>vv>...>v.>...>.>..>v..vv..v..>>.vvvv>>..>>.>.>vv>
+.v..v>.>....v.>>......vv..v....v..>>..v>v.v>>...v.>..>>v...>v>..>.vv.>>...>>v....>v..v...v.>v.v.>v.v.>v..>..v.v>..>>>>.>v.>v..>>......v.vv.
+>>.>.>>.vvv.>.v.>..>..v>v>v>>.>..v.vv.>.>..>v>.>v.vv....>v..>.>.>.v>..vv...>v...v...>>>....>vvv.>...vvv..>..v>>.v...>>.vv.vvv.v.vv...vv.v..
+.vv>..>.>...>v.v...>>v...v>v>>.v>>v.>...v>v.vv>.vv>v>v.>v..>.>.>>v..>..v>.>>v>>..v...>>..v...v....vv.vv...vv.>>v..v>.....>>.>>...v>.....>vv
+v.>.>...v..v>..v...>.vv.>..>.>.>........>v.>>.....v>...v.>v>vvvvvv.v.v..v>v>....>......>>..>vv>>>>v..vv>.v.v>..v.>.v>>.>..v>v...vv>>v.>v..>
+.>.>v.....v.>..>v.>..>.v....v>v>.>..v...v.vv.vv..>.>>v...>vvv>vv..>..vvv.>vv>...v>.v.v..>v..>.v>.v>.>v..v.>.>..>...>>..vv..>>...v>v.>v..v.v
+.>>.>..>v.v.>>vv>..>>....>>..vv..v.v..vv>v.v..>v>.....>v.v....v.vvv.v.v.>.v.....vvv>vv.>..>.....v>v>.vv.>v>>.v>v>.>..>.v>v..v......>.v.>.>.
+...v>v...>>...vvv>>>....>>vvvv>...>v>>.>v..v>.vvv>>.v>...vv>.v>.>..v>v.>v>>v>v.v...>>v>.....>>..v>..vv.v.>.>>..>..v.vv.>>..>.vv>v.v...v...v
+vv>>>..vvv.>.>v>v>v>>v>.>vv..>v>.v.v.v.>>>>...v>...v..v.......vv>..>.v>.>.....>vv..>.>...v.vvv....>.v.>>>>vv>>v>v.>.v.v..v.v.>>v.v>....>vv.
+.vvv>.>.....>v>>..>>>v>.>v...v..>v..v.vv>.v.v.>.>v...v..>v..vvv..vv.>.>vv...>...>...v...vv.vv..vv>>>.vv.v.>......v.v......>...>..>v.>v...>.
+>.>.v.>>>..>>.v..>v.>.>v.>..v.>v.....v..v>.......>>.>..>..v>.>>...>v...vvv..v>vvv>.v>..v..>...>..>v>...v.v...v.v.>...>.....v..>.v.v>v>vv.>.
+v>>v>v.>...>..>....>.>vvv...>.......>>.v.vv.v...>.>.v...>v...>.>..v..v.v....v.v..v>>>>v...>>.v.vv>>>>.v>.>v...>>...>.v...vv.......vv...>>..
+....>>...v>.>v.v>>>v.v...........v.v>.>v.v>v..v>v..v.vv>>...v..>>vv...>.v.....v......>....>.v>v.v..vvv>..>vv.>>v...>>>..>...v.>v...>.>.....
+>vv>vv.>v.vv.vv.....vv>>.v.v.v..>v>.>.>>vv>>..>.v....v>v>.>..>v>.v>v>.v.>v..>>.v>.>v.>>.>....v>..>vv>..>>>>v>>>.v>...>.vv.v>>>.>vvv..>..vv.`
 
-var fs = require('fs');
+let lines = input.split("\n");
 
-fs.readFile('input.txt', 'utf-8', (err, data) => {
+let map = lines.map((l) => l.split(""));
+let otherMap = lines.map((l) => l.split(""));
 
-	if (err){
-		console.log(err);
-		process.exit(1);
+let width = map[0].length;
+let stepCount = 0;
+let step = 0;
+let finished = false;
+
+var copyMap = function(map){
+	return map.map((l) => l.slice());
+}
+
+var printMap = function(map){
+	for (let i = 0; i < map.length; i++){
+		console.log(map[i].join(""));
 	}
+}
 
-	let lines = data.split("\r\n");
-	//console.log(lines);
-	let map = lines.map((l) => l.split(""));
-	let otherMap = lines.map((l) => l.split(""));
-
-	let width = map[0].length;
-	let stepCount = 0;
-	let step = 0;
-	let finished = false;
-
-	var copyMap = function(map){
-		return map.map((l) => l.slice());
-	}
-
-	var printMap = function(map){
-		for (let i = 0; i < map.length; i++){
-			console.log(map[i].join(""));
+// printMap(map);
+let somethingChanged = false;
+while (!finished){
+	somethingChanged = false;
+	// move > 
+	for (let i = 0; i < map.length; i++){
+		let line = map[i];
+		let otherLine = otherMap[i];
+		for (let j = 0; j < line.length; j++){ 
+			let nextColumn = (j + 1) % line.length;
+			if (line[j] == '>' && line[nextColumn] == '.'){
+				otherLine[j] = '.';
+				otherLine[nextColumn] = '>';
+				j++;
+				somethingChanged = true;
+			}else{
+				otherLine[j] = line[j];
+			}
 		}
 	}
 
-	printMap(map);
-	let somethingChanged = false;
-	while (!finished){
-		somethingChanged = false;
-		// move > 
+	map = copyMap(otherMap);
+
+	// move v 
+	for (let j = 0; j < width; j++){ 
+	
 		for (let i = 0; i < map.length; i++){
+			let nextRow = (i + 1) % map.length;
+
 			let line = map[i];
+			let nextLine = map[nextRow];
+
 			let otherLine = otherMap[i];
-			for (let j = 0; j < line.length; j++){ 
-				let nextColumn = (j + 1) % line.length;
-				if (line[j] == '>' && line[nextColumn] == '.'){
-					otherLine[j] = '.';
-					otherLine[nextColumn] = '>';
-					j++;
-					somethingChanged = true;
-				}else{
-					otherLine[j] = line[j];
-				}
+			let otherNextLine = otherMap[nextRow];
+			if (line[j] == 'v' && nextLine[j] == '.'){
+				otherLine[j] = '.';
+				otherNextLine[j] = 'v';
+				i++;
+				somethingChanged = true;
+			}else{
+				otherLine[j] = line[j];
 			}
-		}
-
-		map = copyMap(otherMap);
-
-		// move v 
-		for (let j = 0; j < width; j++){ 
-		
-			for (let i = 0; i < map.length; i++){
-				let nextRow = (i + 1) % map.length;
-
-				let line = map[i];
-				let nextLine = map[nextRow];
-
-				let otherLine = otherMap[i];
-				let otherNextLine = otherMap[nextRow];
-				if (line[j] == 'v' && nextLine[j] == '.'){
-					otherLine[j] = '.';
-					otherNextLine[j] = 'v';
-					i++;
-					somethingChanged = true;
-				}else{
-					otherLine[j] = line[j];
-				}
-			}
-		}
-
-		// switch variables
-		map = copyMap(otherMap);
-
-		if (!somethingChanged){
-			finished = true;
-		}
-
-		step++;
-		if (step == stepCount){
-			finished = true;
 		}
 	}
 
+	// switch variables
+	map = copyMap(otherMap);
 
-	console.log( " ");
-	printMap(map);
+	if (!somethingChanged){
+		finished = true;
+	}
 
-	console.log("ended in step:", step);
-});
+	step++;
+	if (step == stepCount){
+		finished = true;
+	}
+}
+
+
+console.log( " ");
+// printMap(map);
+
+console.log("ended in step:", step);
+
