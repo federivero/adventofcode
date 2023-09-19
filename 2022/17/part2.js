@@ -2,19 +2,19 @@ const input = `>><>><<<<><<<<><<<>><>>><>>>><>>>><>><<>>><<<>>><<>><>>><<>>>><<<
 
 const sample = `>>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>`;
 
-let current = sample;
+let current = input;
 let pieces = [
     [
         ["#","#","#","#"]
     ],
     [
-        [" ","#"," ",],       
+        [".","#",".",],       
         ["#","#","#",],       
-        [" ","#"," ",],                                
+        [".","#",".",],                                
     ],
     [
-        [" "," ","#",],       
-        [" "," ","#",],       
+        [".",".","#",],       
+        [".",".","#",],       
         ["#","#","#",],                                
     ],
     [
@@ -50,18 +50,33 @@ function calculateHeight(){
 
 function placeRock(map, y, x){
     while ((map.length - 1) < y){
-        map.push([" ", " ", " ", " ", " ", " ", " "])
+        map.push([".", ".", ".", ".", ".", ".", "."])
     }
     map[y][x] = "#";
 }
 
-let pieceCount = 10000000; //00000;
+let pieceCount = 20000; //00000;
 let height = 0;
 
+let pieceMoves = [];
+let lastPiece = null;
+let pieceMoveMap = {};
+
+function calcKey(pieceMove){
+    return `p-${pieceMove.piece}ws-${pieceMove.windStart}we-${pieceMove.windEnd}`;
+}
+
+let heightUntilLoop = 0;
+let loopFoundMapHeight = 0
+let loopConfirmed = false
 for (let i = 0; i < pieceCount; i++){
+    let currentPieceIndex = pieceIndex;
+    let windStartIndex = currentIndex;
+    let windEndIndex = currentIndex;
     let piece = { parts: getNextPiece(), x: 2, y: calculateHeight() + 3 };
     let falling = true;
     while (falling){
+        windEndIndex = currentIndex;
         let nextCurrent = current[currentIndex] == ">" ? 1 : -1;
         currentIndex = (currentIndex + 1) % current.length;
 
@@ -114,10 +129,73 @@ for (let i = 0; i < pieceCount; i++){
                     }
                 }
             }  
-        }
-        
+        }   
     }
 
+    if (!loopConfirmed){
+        let pieceMove = { piece: currentPieceIndex, windStart: windStartIndex, windEnd: windEndIndex, h: map.length - 1 } 
+        let key = calcKey(pieceMove);
+        if (pieceMoveMap[key] === undefined){
+            pieceMoveMap[key] = 0
+        }
+        pieceMoveMap[key]++;
+    
+        pieceMoves.push(pieceMove)
+        pieceMove.previous = lastPiece;
+    
+        if (pieceMoveMap[key] > 2){
+            let repCount = 1;
+            // first find the first element
+            let found = false;
+            let lastLoopPieceIndex = pieceMoves.length - 1
+            while (!found){
+                let next = pieceMoves[lastLoopPieceIndex - repCount]
+                let nk = calcKey(next);
+                if (nk === key){
+                    found = true;
+                }else{
+                    next = next.previous;
+                    repCount++;    
+                }
+            }        
+            let previousLoopPieceIndex = lastLoopPieceIndex - repCount
+            // now check that infact there is a loop
+            loopConfirmed = true;
+            for (let q = 0; q < repCount; q++){
+                let lastLoopPiece = pieceMoves[lastLoopPieceIndex - q]
+                let previousLoopPiece = pieceMoves[previousLoopPieceIndex - q]
+                
+                let lastLoopKey = calcKey(lastLoopPiece);
+                let previousLoopKey = calcKey(previousLoopPiece);
+                if (lastLoopKey !== previousLoopKey){
+                    loopConfirmed = false;
+                    break;
+                }
+            }
+    
+            if (loopConfirmed){
+                // now calculate height
+                let lastLoopPiece = pieceMoves[lastLoopPieceIndex]
+                let previousLoopPiece = pieceMoves[previousLoopPieceIndex]
+    
+                let loopHeightIncrease = (lastLoopPiece.h - previousLoopPiece.h) 
+                let loopLength = lastLoopPieceIndex - previousLoopPieceIndex
+                let targetPieceCount = 1000000000000 - previousLoopPieceIndex
+                let loopIterations = Math.floor(targetPieceCount / loopLength);  
+                heightUntilLoop = loopIterations * loopHeightIncrease + previousLoopPiece.h - 1
+                let remainderPieces = targetPieceCount % loopLength
+                pieceCount = remainderPieces
+                i = -1;
+                loopFoundMapHeight = map.length
+            }
+        }
+    
+        lastPiece = pieceMove;
+    }
 }
 
-console.log(height + map.length - 1);
+console.log(heightUntilLoop)
+let extraHeight = map.length - loopFoundMapHeight 
+console.log(extraHeight)
+
+console.log("total height: ", heightUntilLoop + extraHeight)
