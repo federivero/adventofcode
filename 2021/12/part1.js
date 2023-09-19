@@ -1,7 +1,30 @@
-https://adventofcode.com/2021/day/12
+const input = `kc-qy
+qy-FN
+kc-ZP
+end-FN
+li-ZP
+yc-start
+end-qy
+yc-ZP
+wx-ZP
+qy-li
+yc-li
+yc-wx
+kc-FN
+FN-li
+li-wx
+kc-wx
+ZP-start
+li-kc
+qy-nv
+ZP-qy
+nv-xr
+wx-start
+end-nv
+kc-nv
+nv-XQ`
 
-var lines = temp1.innerHTML.split("\n");
-lines.pop();
+var lines = input.split("\n");
 
 var nodes = {};
 
@@ -45,5 +68,4 @@ var findPaths = function(node, currentPath){
 }
 
 findPaths(startNode, ["start"]);
-console.log(paths);
 console.log(paths.length);
