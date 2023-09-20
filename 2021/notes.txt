@@ -1,1 +1,0 @@
-in all problems, temp1 is the name of the DOM element containing the puzzle input (right click -> store as global variable);
