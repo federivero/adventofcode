@@ -10,13 +10,12 @@ const coords = input
     };
   });
 
-/*
 coords.push(coords[0]);
 let edges = [];
 for (let i = 1; i < coords.length; i++) {
   const p1 = coords[i - 1];
   const p2 = coords[i];
-  edges.push({
+  let edge = {
     x1: Math.min(p1.x, p2.x),
     y1: Math.min(p1.y, p2.y),
     x2: Math.max(p1.x, p2.x),
@@ -25,7 +24,25 @@ for (let i = 1; i < coords.length; i++) {
     p2,
     vertical: p1.x === p2.x,
     horizontal: p1.y === p2.y,
-  });
+  };
+  if (edge.vertical) {
+    edge.inner = {
+      x1: edge.x1,
+      y1: edge.y1 + 1,
+      x2: edge.x2,
+      y2: edge.y2 - 1,
+      vertical: true,
+    };
+  } else if (edge.horizontal) {
+    edge.inner = {
+      x1: edge.x1 + 1,
+      y1: edge.y1,
+      x2: edge.x2 - 1,
+      y2: edge.y2,
+      horizontal: true,
+    };
+  }
+  edges.push(edge);
 }
 coords.pop();
 
@@ -39,7 +56,7 @@ for (let i = 0; i < coords.length; i++) {
     const w = Math.abs(p1.x - p2.x) + 1;
     const h = Math.abs(p1.y - p2.y) + 1;
 
-    rects.push({
+    const rect = {
       x1: Math.min(p1.x, p2.x),
       y1: Math.min(p1.y, p2.y),
       x2: Math.max(p1.x, p2.x),
@@ -47,7 +64,39 @@ for (let i = 0; i < coords.length; i++) {
       w,
       h,
       area: w * h,
+    };
+    const sides = [];
+    sides.push({
+      horizontal: true,
+      y1: rect.y1,
+      y2: rect.y1,
+      x1: rect.x1 + 1,
+      x2: rect.x2 - 1,
     });
+    sides.push({
+      horizontal: true,
+      y1: rect.y2,
+      y2: rect.y2,
+      x1: rect.x1 + 1,
+      x2: rect.x2 - 1,
+    });
+    sides.push({
+      vertical: true,
+      x1: rect.x1,
+      x2: rect.x1,
+      y1: rect.y1 + 1,
+      y2: rect.y2 - 1,
+    });
+    sides.push({
+      vertical: true,
+      x1: rect.x2,
+      x2: rect.x2,
+      y1: rect.y1 + 1,
+      y2: rect.y2 - 1,
+    });
+
+    rect.sides = sides;
+    rects.push(rect);
   }
 }
 
@@ -89,12 +138,16 @@ function overlapsBothSides(rect, edge) {
 
 for (let i = 0; i < rects.length; i++) {
   let rect = rects[i];
+
   let approved = true;
-  for (let e = 0; e < edges.length; e++) {
-    let edge = edges[e];
-    if (overlapsBothSides(rect, edge)) {
-      approved = false;
-      break;
+
+  if (approved) {
+    for (let e = 0; e < edges.length; e++) {
+      let edge = edges[e];
+      if (overlapsBothSides(rect, edge.inner)) {
+        approved = false;
+        break;
+      }
     }
   }
   if (approved) {
@@ -104,5 +157,4 @@ for (let i = 0; i < rects.length; i++) {
   }
 }
 
-// 1528567740 too low
-*/
+// 1534043700
